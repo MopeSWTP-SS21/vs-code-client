@@ -1,10 +1,12 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import net = require('net');
 
 import {
 	LanguageClient,
 	LanguageClientOptions,
+	StreamInfo,
 	ServerOptions,
 	TransportKind
 } from 'vscode-languageclient/node';
@@ -30,12 +32,20 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(disposable);
 
-	// TODO find out how we can simply connect to a socket
-	// maybe this: https://github.com/microsoft/vscode-languageserver-node/issues/662
-	let serverOptions: ServerOptions = {
-		command: "java",
-		args: ["-jar", "mope.jar"]
-	};
+	let connectionInfo = {
+		port: 6667,
+		host: "127.0.0.1"
+    };
+
+	let serverOptions = () => {
+        // Connect to language server via socket
+        let socket = net.connect(connectionInfo);
+        let result: StreamInfo = {
+            writer: socket,
+            reader: socket
+        };
+        return Promise.resolve(result);
+    };
 
 	let clientOptions: LanguageClientOptions = {
 		// Register the server for Modelica code
