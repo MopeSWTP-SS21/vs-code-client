@@ -21,6 +21,9 @@
       }
     ]
   },
+  "dependencies": {
+    "vscode-languageclient": "^7.0.0"
+  },
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
