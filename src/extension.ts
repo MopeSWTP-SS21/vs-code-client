@@ -9,6 +9,8 @@ import {
 	TransportKind
 } from 'vscode-languageclient/node';
 
+let client: LanguageClient;
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -27,6 +29,31 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	context.subscriptions.push(disposable);
+
+	// TODO find out how we can simply connect to a socket
+	// maybe this: https://github.com/microsoft/vscode-languageserver-node/issues/662
+	let serverOptions: ServerOptions = {
+		command: "java",
+		args: ["-jar", "mope.jar"]
+	};
+
+	let clientOptions: LanguageClientOptions = {
+		// Register the server for Modelica code
+		documentSelector: [{ scheme: 'file', language: 'modelica' }],
+		synchronize: {
+			// Notify the server about file changes to Modelica files contained in the workspace
+			fileEvents: vscode.workspace.createFileSystemWatcher('**/*.mo')
+		}
+	};
+
+	client = new LanguageClient(
+		'mopeClient',
+		'Mo|E client',
+		serverOptions,
+		clientOptions
+	);
+
+	client.start();
 }
 
 // this method is called when your extension is deactivated
