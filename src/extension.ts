@@ -71,5 +71,6 @@ export function deactivate(): Thenable<void> | undefined {
 	if (!client) {
 		return undefined;
 	}
+	console.log("Mo|E was deactivated");
 	return client.stop();
 }
