@@ -7,10 +7,7 @@ import {
 	LanguageClient,
 	LanguageClientOptions,
 	StreamInfo,
-	ServerOptions,
-	TransportKind,
 	ExecuteCommandRequest,
-	ExecuteCommandOptions,
 	ExecuteCommandParams
 } from 'vscode-languageclient/node';
 
