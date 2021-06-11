@@ -1,70 +1,42 @@
-# mope-client README
+# VS Code client for Mo|E (SWTP2021 edition)
 
-This is the README for your extension "mope-client". After writing up a brief description, we recommend including the following sections.
+This repository contains an extension for Visual Studio Code that uses LSP to communicate with the Mo|E server.
+It is currently only used for testing purposes.
 
-## Features
+## "Quick" start
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Since this project is still in its early stages, the workflow to get everything running is a little complicated.
+I plan to make this easier in the future.
+For now, you have to do the following:
 
-For example if there is an image subfolder under your extension project workspace:
+* Follow the setup instructions of either [MopeSWTP-SS21/MopeSWTP](https://github.com/MopeSWTP-SS21/MopeSWTP) or [MopeSWTP-SS21/LSP4J-test-CS](https://github.com/MopeSWTP-SS21/LSP4J-test-CS).
+* Install [VS Code](https://code.visualstudio.com/) and [node.js](https://nodejs.org/en/) through your favorite package manager.
+* Clone this repository.
+* TODO: node install dependencies?
+* Create a VS Code project that has the working copy of this repository as the only workspace file (this is needed, because the repo contains a `.vscode` folder with settings that are required to test the extension).
+    * Open a new window in VS code.
+    * Select File -> Add folder to workspace ...
+    * Add the folder containing this repository and save the workspace using File -> Save Workspace As ...
 
-\!\[feature X\]\(images/feature-x.png\)
+Once this is all done, you can use the following steps to start experimenting with the client:
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+* Start either [MopeSWTP-SS21/MopeSWTP](https://github.com/MopeSWTP-SS21/MopeSWTP) or the `DiagnosticServer` in [MopeSWTP-SS21/LSP4J-test-CS](https://github.com/MopeSWTP-SS21/LSP4J-test-CS). The latter can be done from IntelliJ by simply opening the class `de.thm.mni.swtp.cs.lsp4jtest.diagnostic.DiagnosticServer` and press CRTL+SHIFT+F10. This should result in the logging message `INFO: Server socket listening on port 6667`.
+* Open this repo in your VS Code workspace and press F5. A new VS Code window should open that allows you to send the following commands via CTRL+SHIFT+P.
+* Use the command `Mo|E: connect` (via CTRL+SHIFT+P) to connect to the Mo|E server.
+* Open and save a file ending with `.mo` to issue a TODO event to the server.
+* Use the command `Mo|E: loadModel` to send a `workspace/executeCommand` to the server with the command `loadModel` and the argument specified by the prompt.
+* Use the command `Mo|E: disconnect` to properly shut the server down.
 
-## Requirements
+## Project structure
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+The most important files of this (and any) VS code extension are `package.json`, which contains the definition of available commands for VS code, and `src/extension.ts`, which defines how the client reacts to these commands.
 
-## Extension Settings
+For the most part, the messages that the client sends are predefined by the class `LanguageServer` in the node module `vscode-languageclient/node`. You can find the [source code of vscode-languageclient](https://github.com/microsoft/vscode-languageserver-node) on GitHub, and it will be downloaded to the folder `node_modules` when you follow the above instructions to install this extension.
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## Known issues
 
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+While the `LanguageClient` class does honor the `ServerCapabilities` sent by the server, there seem to be some capabilities that are not allowed to be null/undefined, such as `textDocumentSync`.
+This leads to errors in the client code of the type `cannot something something of undefined`.
+There seem to be other instances, where such missing or wrong capabilities do not result in an error, but in the client simply asking the server to shut down.
+This is the case when a new workspace folder is added while the Mo|E client is active.
+I am not entirely sure if this is really connected to `ServerCapabilities` or to some other error.
