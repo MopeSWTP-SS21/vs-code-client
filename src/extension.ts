@@ -58,8 +58,8 @@ export function activate(context: vscode.ExtensionContext) {
 				arguments: [x ?? ""]
 			}
 			let execPromise = client.sendRequest(ExecuteCommandRequest.type, exec);
-			execPromise.then((x) => {
-				console.log("Server finished loading "+(x ?? ""));
+			execPromise.then((response) => {
+				vscode.window.showInformationMessage(`loadModel(${x ?? ""}) result:\n${response}`);
 			});
 		}, (reason) => {
 			vscode.window.showInformationMessage("User rejected input for reason "+reason);
