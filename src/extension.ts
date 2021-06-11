@@ -8,7 +8,10 @@ import {
 	LanguageClientOptions,
 	StreamInfo,
 	ServerOptions,
-	TransportKind
+	TransportKind,
+	ExecuteCommandRequest,
+	ExecuteCommandOptions,
+	ExecuteCommandParams
 } from 'vscode-languageclient/node';
 
 let client: LanguageClient;
@@ -39,7 +42,32 @@ export function activate(context: vscode.ExtensionContext) {
 			vscode.window.showInformationMessage("User rejected input for reason "+reason);
 		});
 	});
+	context.subscriptions.push(disposable);
 
+	disposable = vscode.commands.registerCommand('mope-client.disconnect', () => {
+		deactivate();
+	});
+	context.subscriptions.push(disposable);
+
+	disposable = vscode.commands.registerCommand('mope-client.loadModel', () => {
+		let options: vscode.InputBoxOptions = {
+			prompt: "Model name:",
+			placeHolder: "Modelica.Electrical.Analog.Examples.Rectifier"
+		};
+		let userModel = vscode.window.showInputBox(options);
+		userModel.then((x) => {
+			let exec: ExecuteCommandParams = {
+				command: "loadModel",
+				arguments: [x ?? ""]
+			}
+			let execPromise = client.sendRequest(ExecuteCommandRequest.type, exec);
+			execPromise.then((x) => {
+				console.log("Server finished loading "+(x ?? ""));
+			});
+		}, (reason) => {
+			vscode.window.showInformationMessage("User rejected input for reason "+reason);
+		});
+	});
 	context.subscriptions.push(disposable);
 
 }
