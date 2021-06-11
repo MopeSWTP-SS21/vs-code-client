@@ -40,3 +40,13 @@ This leads to errors in the client code of the type `cannot something something 
 There seem to be other instances, where such missing or wrong capabilities do not result in an error, but in the client simply asking the server to shut down.
 This is the case when a new workspace folder is added while the Mo|E client is active.
 I am not entirely sure if this is really connected to `ServerCapabilities` or to some other error.
+
+## Resources
+
+I used the following resources (among others) to build this client:
+
+* [vscode-extension-samples/lsp-sample](https://github.com/Microsoft/vscode-extension-samples/tree/main/lsp-sample)
+* [microsoft/vscode-languageserver-node](https://github.com/microsoft/vscode-languageserver-node)
+* [VS Code extension guide](https://code.visualstudio.com/api/get-started/your-first-extension)
+* [VS Code Language server extension guide](https://code.visualstudio.com/api/language-extensions/language-server-extension-guide)
+* [LSP specification](https://microsoft.github.io/language-server-protocol/specifications/specification-current/)
