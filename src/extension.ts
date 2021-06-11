@@ -28,7 +28,8 @@ export function activate(context: vscode.ExtensionContext) {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
 		let options: vscode.InputBoxOptions = {
-			prompt: "Server port:"
+			prompt: "Server port:",
+			value: "6667"
 		};
 
 		let userPort = vscode.window.showInputBox(options);
