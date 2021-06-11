@@ -19,21 +19,35 @@ export function activate(context: vscode.ExtensionContext) {
 	
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "mope-client" is now active!');
+	console.log('Mo|E client activated');
 
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('mope-client.helloWorld', () => {
+	let disposable = vscode.commands.registerCommand('mope-client.connect', (port) => {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from Mo|E client!');
+		console.log(port);
+		let options: vscode.InputBoxOptions = {
+			prompt: "Server port:"
+		};
+
+		let userPort = vscode.window.showInputBox(options);
+		let x: String | undefined
+		userPort.then((x) => {
+			startLanguageClient(parseInt(x ?? "6667"));
+		}, (reason) => {
+			vscode.window.showInformationMessage("User rejected input for reason "+reason);
+		});
 	});
 
 	context.subscriptions.push(disposable);
 
+}
+
+function startLanguageClient(port: number) {
 	let connectionInfo = {
-		port: 6667,
+		port: port,
 		host: "127.0.0.1"
     };
 

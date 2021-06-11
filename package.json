@@ -10,14 +10,22 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:mope-client.helloWorld"
+    "onCommand:mope-client.connect"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "mope-client.helloWorld",
-        "title": "Hello World"
+        "command": "mope-client.connect",
+        "title": "Mo|E: connect"
+      },
+      {
+        "command": "mope-client.disconnect",
+        "title": "Mo|E: disconnect"
+      },
+      {
+        "command": "mope-client.loadModel",
+        "title": "Mo|E: loadModel"
       }
     ]
   },
