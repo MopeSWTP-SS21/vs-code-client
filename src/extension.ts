@@ -33,7 +33,6 @@ export function activate(context: vscode.ExtensionContext) {
 		};
 
 		let userPort = vscode.window.showInputBox(options);
-		let x: String | undefined
 		userPort.then((x) => {
 			startLanguageClient(parseInt(x ?? "6667"));
 		}, (reason) => {
