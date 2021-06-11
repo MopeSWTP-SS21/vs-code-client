@@ -12,8 +12,8 @@ For now, you have to do the following:
 * Follow the setup instructions of either [MopeSWTP-SS21/MopeSWTP](https://github.com/MopeSWTP-SS21/MopeSWTP) or [MopeSWTP-SS21/LSP4J-test-CS](https://github.com/MopeSWTP-SS21/LSP4J-test-CS).
 * Install [VS Code](https://code.visualstudio.com/) and [node.js](https://nodejs.org/en/) through your favorite package manager.
 * Clone this repository.
-* TODO: node install dependencies?
-* Create a VS Code project that has the working copy of this repository as the only workspace file (this is needed, because the repo contains a `.vscode` folder with settings that are required to test the extension).
+* Run `npm install` in your working copy of this repository in order to install the node modules that this extension depends upon.
+* Create a VS Code project that has the working copy of this repository as the only workspace folder (this is needed, because the repo contains a `.vscode` folder with settings that are required to test the extension). You can do this with the following steps:
     * Open a new window in VS code.
     * Select File -> Add folder to workspace ...
     * Add the folder containing this repository and save the workspace using File -> Save Workspace As ...
@@ -23,7 +23,7 @@ Once this is all done, you can use the following steps to start experimenting wi
 * Start either [MopeSWTP-SS21/MopeSWTP](https://github.com/MopeSWTP-SS21/MopeSWTP) or the `DiagnosticServer` in [MopeSWTP-SS21/LSP4J-test-CS](https://github.com/MopeSWTP-SS21/LSP4J-test-CS). The latter can be done from IntelliJ by simply opening the class `de.thm.mni.swtp.cs.lsp4jtest.diagnostic.DiagnosticServer` and press CRTL+SHIFT+F10. This should result in the logging message `INFO: Server socket listening on port 6667`.
 * Open this repo in your VS Code workspace and press F5. A new VS Code window should open that allows you to send the following commands via CTRL+SHIFT+P.
 * Use the command `Mo|E: connect` (via CTRL+SHIFT+P) to connect to the Mo|E server.
-* Open and save a file ending with `.mo` to issue a TODO event to the server.
+* Open and save a file ending with `.mo` to issue a `workspace/didChangeWatchedFiles` event to the server.
 * Use the command `Mo|E: loadModel` to send a `workspace/executeCommand` to the server with the command `loadModel` and the argument specified by the prompt.
 * Use the command `Mo|E: disconnect` to properly shut the server down.
 
