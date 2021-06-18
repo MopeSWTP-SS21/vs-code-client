@@ -109,6 +109,14 @@ export function deactivate(): Thenable<void> | undefined {
 	if (!client) {
 		return undefined;
 	}
-	console.log("Mo|E was deactivated");
+	// FIXME this information message is currently not shown (maybe because it is cleaned up too early?)
+	console.log("Mo|E is being deactivated");
+	let msg = vscode.window.showInformationMessage("Mo|E client was deactivated, please reconnect using the command 'Mo|E connect'");
+	let res = msg.then(disconnect, disconnect);
+	return res;
+}
+
+export function disconnect(): Thenable<void> | undefined {
+	console.log("Mo|E connection was closed");
 	return client.stop();
 }
