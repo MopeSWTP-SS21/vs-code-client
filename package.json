@@ -27,6 +27,14 @@
         "command": "mope-client.loadModel",
         "title": "Mo|E: loadModel"
       }
+    ],
+    "languages": [
+      {
+        "id": "modelica",
+        "extensions": [
+          ".mo", ".mos"
+        ]
+      }
     ]
   },
   "dependencies": {
