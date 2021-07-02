@@ -93,10 +93,10 @@ export function activate(context: vscode.ExtensionContext) {
 		};
 		let userModel = vscode.window.showInputBox(options);
 		userModel.then((x) => {
-			let tp = new RequestType<string, string, void>("modelica/loadModel", ParameterStructures.byPosition);
-			let execPromise = client.sendRequest(tp, x ?? "");
+			let tp = new RequestType<{"modelName": string}, string, void>("modelica/loadModel", ParameterStructures.byName);
+			let execPromise = client.sendRequest(tp, {"modelName": x ?? ""});
 			execPromise.then((response) => {
-				vscode.window.showInformationMessage(`loadModel(${x ?? ""}) result:\n${response}`);
+				vscode.window.showInformationMessage(`loadModelFixed(${x ?? ""}) result:\n${response}`);
 			});
 		}, (reason) => {
 			vscode.window.showInformationMessage("User rejected input for reason "+reason);
