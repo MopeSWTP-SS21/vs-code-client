@@ -86,6 +86,23 @@ export function activate(context: vscode.ExtensionContext) {
 		});
 	});
 
+	disposable = vscode.commands.registerCommand('mope-client.loadModelFixed', () => {
+		let options: vscode.InputBoxOptions = {
+			prompt: "Model name:",
+			placeHolder: "Modelica.Electrical.Analog.Examples.Rectifier"
+		};
+		let userModel = vscode.window.showInputBox(options);
+		userModel.then((x) => {
+			let tp = new RequestType<string, string, void>("modelica/loadModel", ParameterStructures.byPosition);
+			let execPromise = client.sendRequest(tp, x ?? "");
+			execPromise.then((response) => {
+				vscode.window.showInformationMessage(`loadModel(${x ?? ""}) result:\n${response}`);
+			});
+		}, (reason) => {
+			vscode.window.showInformationMessage("User rejected input for reason "+reason);
+		});
+	});
+
 	context.subscriptions.push(disposable);
 
 }
