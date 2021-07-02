@@ -93,7 +93,7 @@ export function activate(context: vscode.ExtensionContext) {
 		};
 		let userModel = vscode.window.showInputBox(options);
 		userModel.then((x) => {
-			let tp = new RequestType<{"modelName": string}, string, void>("modelica/loadModel", ParameterStructures.byName);
+			let tp = new RequestType<{"modelName": string}, string, void>("modelica/loadModelFixed", ParameterStructures.byName);
 			let execPromise = client.sendRequest(tp, {"modelName": x ?? ""});
 			execPromise.then((response) => {
 				vscode.window.showInformationMessage(`loadModelFixed(${x ?? ""}) result:\n${response}`);
