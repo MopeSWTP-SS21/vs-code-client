@@ -26,6 +26,10 @@
       {
         "command": "mope-client.loadModel",
         "title": "Mo|E: loadModel"
+      },
+      {
+        "command": "mope-client.loadModelFixed",
+        "title": "Mo|E: loadModelFixed"
       }
     ],
     "languages": [
