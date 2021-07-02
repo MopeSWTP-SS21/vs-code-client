@@ -8,7 +8,10 @@ import {
 	LanguageClientOptions,
 	StreamInfo,
 	ExecuteCommandRequest,
-	ExecuteCommandParams
+	ExecuteCommandParams,
+	RequestType,
+	ParameterStructures,
+	RequestType1
 } from 'vscode-languageclient/node';
 
 let client: LanguageClient;
@@ -46,6 +49,26 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 	context.subscriptions.push(disposable);
 
+	// disposable = vscode.commands.registerCommand('mope-client.loadModel', () => {
+	// 	let options: vscode.InputBoxOptions = {
+	// 		prompt: "Model name:",
+	// 		placeHolder: "Modelica.Electrical.Analog.Examples.Rectifier"
+	// 	};
+	// 	let userModel = vscode.window.showInputBox(options);
+	// 	userModel.then((x) => {
+	// 		let exec: ExecuteCommandParams = {
+	// 			command: "loadModel",
+	// 			arguments: [x ?? ""]
+	// 		}
+	// 		let execPromise = client.sendRequest(ExecuteCommandRequest.type, exec);
+	// 		execPromise.then((response) => {
+	// 			vscode.window.showInformationMessage(`loadModel(${x ?? ""}) result:\n${response}`);
+	// 		});
+	// 	}, (reason) => {
+	// 		vscode.window.showInformationMessage("User rejected input for reason "+reason);
+	// 	});
+	// });
+
 	disposable = vscode.commands.registerCommand('mope-client.loadModel', () => {
 		let options: vscode.InputBoxOptions = {
 			prompt: "Model name:",
@@ -53,11 +76,8 @@ export function activate(context: vscode.ExtensionContext) {
 		};
 		let userModel = vscode.window.showInputBox(options);
 		userModel.then((x) => {
-			let exec: ExecuteCommandParams = {
-				command: "loadModel",
-				arguments: [x ?? ""]
-			}
-			let execPromise = client.sendRequest(ExecuteCommandRequest.type, exec);
+			let tp = new RequestType<string, string, void>("modelica/loadModel", ParameterStructures.byPosition);
+			let execPromise = client.sendRequest(tp, x ?? "");
 			execPromise.then((response) => {
 				vscode.window.showInformationMessage(`loadModel(${x ?? ""}) result:\n${response}`);
 			});
@@ -65,6 +85,7 @@ export function activate(context: vscode.ExtensionContext) {
 			vscode.window.showInformationMessage("User rejected input for reason "+reason);
 		});
 	});
+
 	context.subscriptions.push(disposable);
 
 }
