@@ -3,11 +3,28 @@
 This repository contains an extension for Visual Studio Code that uses LSP to communicate with the Mo|E server.
 It is currently only used for testing purposes.
 
-## "Quick" start
+## Quick start
 
-Since this project is still in its early stages, the workflow to get everything running is a little complicated.
-I plan to make this easier in the future.
-For now, you have to do the following:
+Since version 0.0.1, the extension is now available as VSIX file, which can be installed as follows:
+
+* Download the VSIX file from the latest release.
+* Open the command palette with CTRL+SHIFT+P.
+* Select the command "Extensions: Install from VSIX...".
+* Select the file you just downloaded.
+* You should now see several commands starting with "Mo|E:" in the command palette.
+
+Currently, the extension does not start the server itself, so you have to refer to the README of [MopeSWTP-SS21/MopeSWTP](https://github.com/MopeSWTP-SS21/MopeSWTP) to do this.
+We chose this setup, because it allows connecting to a server that is attached to a debugger in an IDE.
+
+Once you have installed the extension and started the server, you can connect to the server using the following commands:
+
+* Use the command `Mo|E: connect` (via CTRL+SHIFT+P) to connect to the Mo|E server. You have to enter the server port that is shown on the console when you start the server. The host is currently locked to the local host.
+* Use the command `Mo|E: loadModel` (or any of the other `Mo|E:` commands besides `connect` and `disconnect`) to send a `workspace/executeCommand` to the server with the command `loadModel` and the argument specified by the prompt.
+* Use the command `Mo|E: disconnect` to properly shut the server down.
+
+## Development setup
+
+In order to set up the project for development, you have to do the following:
 
 * Follow the setup instructions of either [MopeSWTP-SS21/MopeSWTP](https://github.com/MopeSWTP-SS21/MopeSWTP) or [MopeSWTP-SS21/LSP4J-test-CS](https://github.com/MopeSWTP-SS21/LSP4J-test-CS).
 * Install [VS Code](https://code.visualstudio.com/) and [node.js](https://nodejs.org/en/) through your favorite package manager.
@@ -18,14 +35,7 @@ For now, you have to do the following:
     * Select File -> Add folder to workspace ...
     * Add the folder containing this repository and save the workspace using File -> Save Workspace As ...
 
-Once this is all done, you can use the following steps to start experimenting with the client:
-
-* Start either [MopeSWTP-SS21/MopeSWTP](https://github.com/MopeSWTP-SS21/MopeSWTP) or the `DiagnosticServer` in [MopeSWTP-SS21/LSP4J-test-CS](https://github.com/MopeSWTP-SS21/LSP4J-test-CS). The latter can be done from IntelliJ by simply opening the class `de.thm.mni.swtp.cs.lsp4jtest.diagnostic.DiagnosticServer` and press CRTL+SHIFT+F10. This should result in the logging message `INFO: Server socket listening on port 6667`.
-* Open this repo in your VS Code workspace and press F5. A new VS Code window should open that allows you to send the following commands via CTRL+SHIFT+P.
-* Use the command `Mo|E: connect` (via CTRL+SHIFT+P) to connect to the Mo|E server.
-* Open and save a file ending with `.mo` to issue a `workspace/didChangeWatchedFiles` event to the server.
-* Use the command `Mo|E: loadModel` to send a `workspace/executeCommand` to the server with the command `loadModel` and the argument specified by the prompt.
-* Use the command `Mo|E: disconnect` to properly shut the server down.
+Once this is all done, you can press F5 in VS Code to open a new VS Code instance that has the extension installed and is connected to a debug session in the development window.
 
 ## Project structure
 
