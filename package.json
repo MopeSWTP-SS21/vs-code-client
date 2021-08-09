@@ -24,12 +24,32 @@
         "title": "Mo|E: disconnect"
       },
       {
+        "command": "mope-client.sendExpression",
+        "title": "Mo|E: sendExpression"
+      },
+      {
+        "command": "mope-client.loadFile",
+        "title": "Mo|E: loadFile"
+      },
+      {
+        "command": "mope-client.checkModel",
+        "title": "Mo|E: checkModel"
+      },
+      {
+        "command": "mope-client.addPath",
+        "title": "Mo|E: add folder to Modelica path"
+      },
+      {
+        "command": "mope-client.getModelicaPath",
+        "title": "Mo|E: getModelicaPath"
+      },
+      {
         "command": "mope-client.loadModel",
         "title": "Mo|E: loadModel"
       },
       {
-        "command": "mope-client.loadModelFixed",
-        "title": "Mo|E: loadModelFixed"
+        "command": "mope-client.getVersion",
+        "title": "Mo|E: get compiler version"
       }
     ],
     "languages": [

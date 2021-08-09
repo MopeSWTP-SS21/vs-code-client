@@ -74,6 +74,50 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 	context.subscriptions.push(disposable);
 
+	// sendExpression
+	disposable = vscode.commands.registerCommand(
+		'mope-client.sendExpression',
+		() => executeCommand("SendExpression", [
+			new Parameter("OM scripting command", "simulate(Modelica.Electrical.Analog.Examples.Rectifier)")
+		])
+	);
+	context.subscriptions.push(disposable);
+
+	// loadFile
+	disposable = vscode.commands.registerCommand(
+		'mope-client.loadFile',
+		() => executeCommand("LoadFile", [
+			new Parameter("Filename", "/home/mote/Downloads/example.mo")
+		])
+	);
+	context.subscriptions.push(disposable);
+
+	// checkModel
+	disposable = vscode.commands.registerCommand(
+		'mope-client.checkModel',
+		() => executeCommand("CheckModel", [
+			new Parameter("Model name", "Modelica.Electrical.Analog.Examples.Rectifier")
+		])
+	);
+	context.subscriptions.push(disposable);
+
+	// AddPath
+	disposable = vscode.commands.registerCommand(
+		'mope-client.addPath',
+		() => executeCommand("AddPath", [
+			new Parameter("Path", "/home/mote/Documents/modelica-libraries")
+		])
+	);
+	context.subscriptions.push(disposable);
+
+	// GetPath
+	disposable = vscode.commands.registerCommand(
+		'mope-client.getModelicaPath',
+		() => executeCommand("GetPath", [])
+	);
+	context.subscriptions.push(disposable);
+
+	// loadModel
 	disposable = vscode.commands.registerCommand(
 		'mope-client.loadModel',
 		() => executeCommand("LoadModel", [
@@ -82,6 +126,12 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 	context.subscriptions.push(disposable);
 
+	// getVersion
+	disposable = vscode.commands.registerCommand(
+		'mope-client.getVersion',
+		() => executeCommand("Version", [])
+	);
+	context.subscriptions.push(disposable);
 }
 
 function startLanguageClient(port: number) {
