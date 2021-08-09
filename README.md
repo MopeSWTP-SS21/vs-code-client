@@ -45,11 +45,19 @@ For the most part, the messages that the client sends are predefined by the clas
 
 ## Known issues
 
+### ServerCapabilities
+
 While the `LanguageClient` class does honor the `ServerCapabilities` sent by the server, there seem to be some capabilities that are not allowed to be null/undefined, such as `textDocumentSync`.
 This leads to errors in the client code of the type `cannot something something of undefined`.
 There seem to be other instances, where such missing or wrong capabilities do not result in an error, but in the client simply asking the server to shut down.
 This is the case when a new workspace folder is added while the Mo|E client is active.
 I am not entirely sure if this is really connected to `ServerCapabilities` or to some other error.
+
+### Deprecated command names
+
+Currently, the server uses command names for the `workspace/executeCommand` calls that start with an uppercase letter.
+This will stop to work in future versions of MopeLSP.
+If you start seeing errors about rejected promises, the command names will have to be changed in `package.json` and `src/extension.ts`.
 
 ## Resources
 
