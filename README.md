@@ -37,6 +37,14 @@ In order to set up the project for development, you have to do the following:
 
 Once this is all done, you can press F5 in VS Code to open a new VS Code instance that has the extension installed and is connected to a debug session in the development window.
 
+## Packaging
+
+In order to package the project to a VSIX file, you need to install the node package [`vsce`](https://code.visualstudio.com/api/working-with-extensions/publishing-extension) and then run the following command:
+
+```bash
+vsce package
+```
+
 ## Project structure
 
 The most important files of this (and any) VS code extension are `package.json`, which contains the definition of available commands for VS code, and `src/extension.ts`, which defines how the client reacts to these commands.
