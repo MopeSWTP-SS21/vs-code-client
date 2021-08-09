@@ -16,6 +16,31 @@ import {
 
 let client: LanguageClient;
 
+class Parameter {
+	constructor(readonly label: string, readonly placeholder: string) {}
+}
+
+async function executeCommand(command: string, parameters: Parameter[]) {
+	let userArgs: string[] = [];
+	for (let p of parameters) {
+		let options: vscode.InputBoxOptions = {
+			prompt: p.label,
+			placeHolder: p.placeholder
+		};
+		let userArg = await vscode.window.showInputBox(options);
+		if (userArg === undefined) return; // silently cancel operation if user cancels input
+		userArgs.push(userArg);
+	}
+	let exec: ExecuteCommandParams = {
+		command: command,
+		arguments: userArgs
+	}
+	let execPromise = client.sendRequest(ExecuteCommandRequest.type, exec);
+	execPromise.then((response) => {
+		vscode.window.showInformationMessage(`${command}(${userArgs.join(", ")}) result:\n${response}`);
+	});
+}
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
