@@ -77,7 +77,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// sendExpression
 	disposable = vscode.commands.registerCommand(
 		'mope-client.sendExpression',
-		() => executeCommand("SendExpression", [
+		() => executeCommand("ExecuteCommand", [
 			new Parameter("OM scripting command", "simulate(Modelica.Electrical.Analog.Examples.Rectifier)")
 		])
 	);
