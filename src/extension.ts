@@ -198,6 +198,7 @@ export function disconnect(): Thenable<void> | undefined {
 	console.log("Mo|E connection was closed");
 	return client.stop();
 }
+
 async function ensurePathIsInModelicaPath(fsPath: string) {
 	let currentPath: string = await client.sendRequest(ExecuteCommandRequest.type, {
 		command: "GetPath",
@@ -210,4 +211,3 @@ async function ensurePathIsInModelicaPath(fsPath: string) {
 	});
 	return true;
 }
-
