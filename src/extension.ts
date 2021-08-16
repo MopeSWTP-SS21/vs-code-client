@@ -167,6 +167,19 @@ function startLanguageClient(port: number) {
 	);
 
 	client.start();
+
+	client.onReady().then(addWorkspaceFoldersToModelicaPath);
+}
+
+function addWorkspaceFoldersToModelicaPath() {
+	for (let wsf of vscode.workspace.workspaceFolders ?? []) {
+		let added = ensurePathIsInModelicaPath(wsf.uri.fsPath);
+		added.then((x) => {
+			if (x) {
+				vscode.window.showInformationMessage(`Added workspace path ${wsf.uri.fsPath} to MODELICAPATH.`);
+			}
+		})
+	}
 }
 
 // this method is called when your extension is deactivated
@@ -185,3 +198,16 @@ export function disconnect(): Thenable<void> | undefined {
 	console.log("Mo|E connection was closed");
 	return client.stop();
 }
+async function ensurePathIsInModelicaPath(fsPath: string) {
+	let currentPath: string = await client.sendRequest(ExecuteCommandRequest.type, {
+		command: "GetPath",
+		arguments: []
+	})
+	if (currentPath.indexOf(fsPath) >= 0) { return false; }
+	await client.sendRequest(ExecuteCommandRequest.type, {
+		command: "AddToModelicaPath",
+		arguments: [fsPath]
+	});
+	return true;
+}
+
