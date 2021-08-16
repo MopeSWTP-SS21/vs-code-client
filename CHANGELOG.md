@@ -4,6 +4,14 @@ All notable changes to the "mope-client" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.0.3] - 2021-08-16
+
+### Fixed
+
+* Command name for `sendExpression` function was `SendExpression` but should have been `ExecuteCommand`.
+
+NOTE: This is a hotfix for the presentation version, designed for the same MopeLSP version as version 0.0.2.
+
 ## [0.0.2] - 2021-08-16
 
 ### Added
@@ -17,5 +25,6 @@ NOTE: This version is designed to work with the [`Presentation` branch of MopeLS
 This is the initial release of the VS Code client for MopeLSP as a VSIX package.
 It is designed to work with MopeLSP version 0.1.0.
 
+[0.0.3]: https://github.com/MopeSWTP-SS21/vs-code-client/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/MopeSWTP-SS21/vs-code-client/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/MopeSWTP-SS21/vs-code-client/releases/tag/v0.0.1
