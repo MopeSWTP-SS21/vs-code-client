@@ -2,7 +2,7 @@
   "name": "mope-client",
   "displayName": "Mo|E client",
   "description": "Client for the SWTP 2021 version of the Modelica-Pipe-Editor (Mo|E) adding LSP support for the language Modelica",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "CSchoel",
   "repository": {
     "type": "git",

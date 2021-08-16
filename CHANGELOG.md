@@ -4,6 +4,12 @@ All notable changes to the "mope-client" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.0.2] -- 2021-08-16
+
+### Added
+
+* Upon using the `mope-client.connect` action, all current workspace folders are added to the MODELICAPATH as soon as the connection to the server is ready.
+
 ## [0.0.1] -- 2021-08-09
 
 This is the initial release of the VS Code client for MopeLSP as a VSIX package.
