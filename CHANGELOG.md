@@ -4,7 +4,7 @@ All notable changes to the "mope-client" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [0.0.2] -- 2021-08-16
+## [0.0.2] - 2021-08-16
 
 ### Added
 
@@ -12,9 +12,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 NOTE: This version is designed to work with the [`Presentation` branch of MopeLSP](https://github.com/MopeSWTP-SS21/MopeSWTP/tree/Presentation) at commit hash e575be33bc1f4145ea2a04973610f95edd1e038c.
 
-## [0.0.1] -- 2021-08-09
+## [0.0.1] - 2021-08-09
 
 This is the initial release of the VS Code client for MopeLSP as a VSIX package.
 It is designed to work with MopeLSP version 0.1.0.
 
+[0.0.2]: https://github.com/MopeSWTP-SS21/vs-code-client/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/MopeSWTP-SS21/vs-code-client/releases/tag/v0.0.1
