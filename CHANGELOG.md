@@ -10,6 +10,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 * Upon using the `mope-client.connect` action, all current workspace folders are added to the MODELICAPATH as soon as the connection to the server is ready.
 
+NOTE: This version is designed to work with the [`Presentation` branch of MopeLSP](https://github.com/MopeSWTP-SS21/MopeSWTP/tree/Presentation) at commit hash e575be33bc1f4145ea2a04973610f95edd1e038c.
+
 ## [0.0.1] -- 2021-08-09
 
 This is the initial release of the VS Code client for MopeLSP as a VSIX package.
