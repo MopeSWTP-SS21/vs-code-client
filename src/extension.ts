@@ -205,7 +205,7 @@ async function ensurePathIsInModelicaPath(fsPath: string) {
 	})
 	if (currentPath.indexOf(fsPath) >= 0) { return false; }
 	await client.sendRequest(ExecuteCommandRequest.type, {
-		command: "AddToModelicaPath",
+		command: "AddPath",
 		arguments: [fsPath]
 	});
 	return true;
